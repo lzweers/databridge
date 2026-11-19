@@ -1,12 +1,36 @@
 # DataBridge
 
-**Data integration, validation and traceability — in one local-first operations workspace.**
+**Reliable product-data ingestion, validation and traceability — from CSV and REST APIs to an auditable catalog.**
 
-DataBridge is an engineering portfolio project that brings inconsistent supplier data into a consistent, searchable catalog. It accepts CSV uploads and product data from an allowlisted REST API, validates records, stores provenance, and displays data-quality metrics and scheduled-import activity.
+DataBridge is a local-first, full-stack data operations application for importing supplier data, validating inconsistent records, tracking changes and monitoring recurring imports. It combines a React/TypeScript dashboard with a FastAPI processing service, PostgreSQL and a dedicated scheduling worker.
+
+[Explore the screenshots](#screenshots) · [Capabilities](#what-you-can-do) · [Architecture](#system-overview) · [Run locally](#run-locally) · [Tests & benchmark](#tests-and-reproducible-benchmark)
 
 **Status:** local development / portfolio MVP. **Not production-ready:** no authentication or multi-tenant isolation. Do not expose the API or Docker ports to the public internet.
 
-> **UI:** German · **Tech:** React, TypeScript, FastAPI, Python, PostgreSQL, SQLAlchemy, Docker Compose · **Tests:** Pytest · **Automation:** dedicated Python worker
+> **UI:** German · **Stack:** React, TypeScript, FastAPI, Python, PostgreSQL, SQLAlchemy, Docker Compose · **Tests:** Pytest · **Automation:** dedicated Python worker
+
+## Screenshots
+
+The screenshots below show the **running corporate UI with local demonstration data**. They are not generated design mockups.
+
+### Operations overview
+
+Current offer counts, import history and the four-stage processing pipeline.
+
+![DataBridge operations dashboard with import metrics, recent runs and pipeline stages](assets/screenshots/Dashboardscreenshot.png)
+
+### Product catalog
+
+Database-backed product search, source filtering, sorting, pagination, per-offer detail view and filtered CSV export.
+
+![DataBridge product catalog with searchable and sortable supplier offers](assets/screenshots/CatalogueScreenshot.png)
+
+### Data quality
+
+Acceptance rates, rejected rows, validation issue categories and source-level metrics.
+
+![DataBridge data-quality overview with acceptance metrics and validation issues](assets/screenshots/DataQualityScreenshot.png)
 
 ## What you can do
 
@@ -110,6 +134,7 @@ backend/benchmark.py  Isolated synthetic ingestion benchmark
 frontend/src/         React UI and Corporate design system
   corporate.css       Green/white enterprise visual language
 demo-data/            Sample CSV files (synthetic)
+assets/screenshots/   Actual screenshots of the local corporate UI
 docs/                 Architecture, demo, case study and release checklist
 .github/workflows/    CI for Python, frontend build and backend Docker packaging
 compose.yaml          Local-only services: db, backend, worker, frontend

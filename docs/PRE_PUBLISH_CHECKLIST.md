@@ -69,7 +69,7 @@ If `origin` already exists, inspect `git remote -v` rather than blindly overridi
 
 ## 5. Make it recruiter-friendly
 
-- [ ] Add two or three real screenshots to `docs/screenshots/` and link them from the README.
+- [ ] Add two or three real screenshots to `assets/screenshots/` and link them from the README.
 - [ ] Set GitHub About description, e.g. `Local-first data operations app: CSV/API ingestion, validation, lineage, job scheduling and quality analytics.`
 - [ ] Set topics: `react`, `typescript`, `fastapi`, `python`, `postgresql`, `etl`, `data-quality`, `docker`.
 - [ ] Check the **Actions** tab; the included workflow should test backend, frontend build and Docker packaging.
