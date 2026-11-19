@@ -1,0 +1,31 @@
+DataBridge — Corporate Contrast UI Update (v0.7 UI)
+==================================================
+Designrichtlinie: dunkelgrüne Sidebar und Topbar, weißer Arbeitsbereich,
+minimalistische Enterprise-Karten und Typografie. Gilt für alle DataBridge-Seiten.
+
+Geänderte Dateien:
+- frontend/src/App.tsx       (Darstellung, Überschriften, SVG-Icons)
+- frontend/src/main.tsx      (lädt das zusätzliche Stylesheet)
+- frontend/src/corporate.css (vollständiges Corporate-Designsystem)
+
+UNVERÄNDERT: Backend, Datenbank, Docker-Compose, API, Datenverarbeitung.
+
+INSTALLATION (VS Code / PowerShell, im Ordner databridge-starter):
+
+1. ZIP herunterladen. Optional zuvor Sicherung der Frontend-Dateien anlegen.
+2. ZIP entpacken:
+   Expand-Archive -Path "$env:USERPROFILE\Downloads\databridge-corporate-ui-update.zip" -DestinationPath "." -Force
+3. Frontend-Dienst neu bauen:
+   docker compose up -d --build frontend
+4. Im Browser http://localhost:5173 öffnen und Strg+F5 drücken.
+5. Optional vollständigen Produktionsbuild prüfen:
+   docker compose run --rm frontend npm run build
+
+Es sind keine Backend-Tests, Datenbankmigrationen oder Datenimporte nötig.
+Kein `docker compose down -v` verwenden.
+
+WICHTIG:
+- Der Badge zeigt bewusst ENTWICKLUNG, weil dieses Projekt lokal betrieben wird.
+- Das Update ist ausschließlich kosmetisch; vorhandene Arbeitsabläufe bleiben gleich.
+- React-TSX wurde syntaktisch geprüft, ebenso die CSS-Datei.
+- Der vollständige Produktionsbuild muss auf deinem PC geprüft werden.

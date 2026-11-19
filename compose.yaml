@@ -1,0 +1,47 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: databridge
+      POSTGRES_PASSWORD: localdev
+      POSTGRES_DB: databridge
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U databridge -d databridge"]
+      interval: 3s
+      timeout: 3s
+      retries: 15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgresql+psycopg://databridge:localdev@db:5432/databridge
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health', timeout=3)"]
+      interval: 5s
+      timeout: 4s
+      retries: 15
+  worker:
+    build: ./backend
+    command: ["python", "-m", "app.scheduler_worker"]
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql+psycopg://databridge:localdev@db:5432/databridge
+    depends_on:
+      backend:
+        condition: service_healthy
+  frontend:
+    build: ./frontend
+    ports:
+      - "127.0.0.1:5173:5173"
+    environment:
+      VITE_API_URL: http://localhost:8000
+    depends_on:
+      - backend
+volumes:
+  postgres_data:
